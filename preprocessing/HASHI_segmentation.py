@@ -28,7 +28,6 @@ from HASHI_cnn_utils import ConvNet, get_flat_dim
 
 
 # --- Data directories ---
-rootp = os.path.dirname(os.path.abspath(__file__))
 dir_slides = ''                 #path with all the slides
 dir_thumbnails = ''             #path where segmentation masks will be stored (reduced size)
 
@@ -60,7 +59,7 @@ FC_DIMS = [256, N_CLASSES]
 DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 flat_dim = get_flat_dim(INPUT_DIM, N_CONV, CONV_FILTERS, K_SIZES, P_KERNELS, STRIDES, P_STRIDES, PADDINGS)
 model = ConvNet(N_CONV, N_POOL, N_FC, CONV_FILTERS, K_SIZES, P_KERNELS, STRIDES, P_STRIDES, PADDINGS, FC_DIMS, INPUT_DIM[0], flat_dim).to(DEVICE)
-model.load_state_dict(torch.load(os.path.join(rootp, 'HASHI_trained_cnn_model.pth'), map_location=DEVICE))
+model.load_state_dict(torch.load('./authors_models/HASHI_trained_cnn_model.pth'), map_location=DEVICE))
 model.eval()
 
 

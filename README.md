@@ -1,6 +1,15 @@
 # Weakly-Supervised Classification of HER2 Expression in Breast Cancer Haematoxylin and Eosin Stained Slides
 ## About
 Implementation of the paper [_"Weakly-Supervised Classification of HER2 Expression in Breast Cancer Haematoxylin and Eosin Stained Slides"_](https://www.mdpi.com/2076-3417/10/14/4728), by Sara P. Oliveira, João Ribeiro Pinto, Tiago Gonçalves, Rita Canas-Marques, Maria J. Cardoso, Hélder P. Oliveira and Jaime S. Cardoso.
+## Abstract
+Human epidermal growth factor receptor 2 (HER2) evaluation commonly requires immunohistochemistry (IHC) tests on breast cancer tissue, in addition to the standard haematoxylin and eosin (H&E) staining tests. Additional costs and time spent on further testing might be avoided if HER2 overexpression could be effectively inferred from H&E stained slides, as a preliminary indication of the IHC result. In this paper, we propose the first method that aims to achieve this goal. The proposed method is based on multiple instance learning (MIL), using a convolutional neural network (CNN) that separately processes H&E stained slide tiles and outputs an IHC label. This CNN (Fig. 1) is pretrained on IHC stained slide tiles but does not use these data during inference/testing. H&E tiles are extracted from invasive tumour areas segmented with the HASHI algorithm. The individual tile labels are then combined to obtain a single label for the whole slide. The network was trained on slides from the HER2 Scoring Contest dataset (HER2SC) and tested on two disjoint subsets of slides from the HER2SC database and the TCGA-TCIA-BRCA (BRCA) collection. The proposed method (Fig. 2) attained 83.3% classification accuracy on the HER2SC test set and 53.8% on the BRCA test set. Although further efforts should be devoted to achieving improved performance, the obtained results are promising, suggesting that it is possible to perform HER2 overexpression classification on H&E stained tissue slides.
+
+![alt text](readme_imgs/proposed_method_cnn.png "The CNN Module of our Proposed Method")
+Fig. 1 - Architecture of the implemented convolutional neural network.
+
+![alt text](readme_imgs/proposed_method.png "Our Proposed Method")
+Fig. 2 - The proposed approach for weakly-supervised HER2 status classification on BCa H&E stained slides.
+
 ## Clone this repository
 To clone this repository, open a Terminal window and type:
 ```bash
@@ -154,7 +163,7 @@ val_path = ''          # path with HER2/HE validation .pkl files (per slide) wit
 
 
 # --- Hyperparameters ---
-DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'   #gpu to use
+DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'   # gpu to use
 N_EPOCHS = 150                                              # number of training epochs  (default: 150)
 BATCH_TILE = 300                                            # number of tiles to select per slide (default: 300)
 IMGS_STEP = 2                                               # number of slides to accumulate after backprop (default: 2)

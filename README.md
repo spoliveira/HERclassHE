@@ -2,7 +2,7 @@
 ## About
 Implementation of the paper [_"Weakly-Supervised Classification of HER2 Expression in Breast Cancer Haematoxylin and Eosin Stained Slides"_](https://www.mdpi.com/2076-3417/10/14/4728), by Sara P. Oliveira, João Ribeiro Pinto, Tiago Gonçalves, Rita Canas-Marques, Maria J. Cardoso, Hélder P. Oliveira and Jaime S. Cardoso.
 ## Abstract
-Human epidermal growth factor receptor 2 (HER2) evaluation commonly requires immunohistochemistry (IHC) tests on breast cancer tissue, in addition to the standard haematoxylin and eosin (H&E) staining tests. Additional costs and time spent on further testing might be avoided if HER2 overexpression could be effectively inferred from H&E stained slides, as a preliminary indication of the IHC result. In this paper, we propose the first method that aims to achieve this goal. The proposed method is based on multiple instance learning (MIL), using a convolutional neural network (CNN) that separately processes H&E stained slide tiles and outputs an IHC label. This CNN (Fig. 1) is pretrained on IHC stained slide tiles but does not use these data during inference/testing. H&E tiles are extracted from invasive tumour areas segmented with the HASHI algorithm. The individual tile labels are then combined to obtain a single label for the whole slide. The network was trained on slides from the HER2 Scoring Contest dataset (HER2SC) and tested on two disjoint subsets of slides from the HER2SC database and the TCGA-TCIA-BRCA (BRCA) collection. The proposed method (Fig. 2) attained 83.3% classification accuracy on the HER2SC test set and 53.8% on the BRCA test set. Although further efforts should be devoted to achieving improved performance, the obtained results are promising, suggesting that it is possible to perform HER2 overexpression classification on H&E stained tissue slides.
+Human epidermal growth factor receptor 2 (HER2) evaluation commonly requires immunohistochemistry (IHC) tests on breast cancer tissue, in addition to the standard haematoxylin and eosin (H&E) staining tests. Additional costs and time spent on further testing might be avoided if HER2 overexpression could be effectively inferred from H&E stained slides, as a preliminary indication of the IHC result. In this paper, we propose the first method that aims to achieve this goal. The proposed method is based on multiple instance learning (MIL), using a convolutional neural network (CNN) that separately processes H&E stained slide tiles and outputs an IHC label. This CNN (Fig. 1) is pretrained on IHC stained slide tiles but does not use these data during inference/testing. H&E tiles are extracted from invasive tumour areas segmented with the HASHI algorithm. The individual tile labels are then combined to obtain a single label for the whole slide. The network was trained on slides from the HER2 Scoring Contest dataset (HER2SC) and tested on two disjoint subsets of slides from the HER2SC database and the TCGA-TCIA-BRCA (BRCA) collection. The proposed method (Fig. 2) attained __83.3%__ classification accuracy on the HER2SC test set and __53.8%__ on the BRCA test set. Although further efforts should be devoted to achieving improved performance, the obtained results are promising, suggesting that it is possible to perform HER2 overexpression classification on H&E stained tissue slides.
 
 ![alt text](readme_imgs/proposed_method_cnn.png "The CNN Module of our Proposed Method")
 Fig. 1 - Architecture of the implemented convolutional neural network.
@@ -20,7 +20,7 @@ Then go to the repository's main directory:
 $ cd HERclassHE
 ```
 ## Dependencies
-Please be sure that you have the following Python packages installed:
+Please be sure that you have (at least) the following Python packages installed:
 ```
 Package Name             Version            
 
@@ -42,8 +42,30 @@ Or you can create a virtual Python environment (Python 3.7) and run:
 ```bash
 $ pip install -r requirements.txt
 ```
+### Troubleshooting: Installation of the Dependencies
+Please read these notes before installing the dependencies manually or through the ["requirements.txt"](requirements.txt).
+#### OpenSlide
+According to the [OpenSlide PyPi Page](https://pypi.org/project/openslide-python/), before the installation of the OpenSlide Python API, you should install the OpenSlide package for your OS. You can find instructions [here](https://openslide.org/download/) (Linux or macOS only). 
+
+Then, to avoid problems with __setuptools__ in Python, you should proceed as follows:
+```bash
+$ pip install setuptools==45
+```
+
+And finally:
+```bash
+$ pip install openslide-python
+```
+#### Ghalton
+To install [Ghalton](https://github.com/fmder/ghalton), you need to [install Swig first](https://www.dev2qa.com/how-to-install-swig-on-macos-linux-and-windows/). Then, you may run:
+```bash
+$ pip install ghalton
+```
+
+
+
 ## Data
-If you need help with access to the data used in this paper, please send an e-mail to: [sara.i.oliveira@inesctec.pt](mailto:sara.i.oliveira@inesctec.pt).
+If you need help with access to the data used in this paper, please send an e-mail to [sara.i.oliveira@inesctec.pt](mailto:sara.i.oliveira@inesctec.pt).
 ## Usage
 We advise you to read the [full paper](https://www.mdpi.com/2076-3417/10/14/4728) to understand which task may fit your purposes or if you want to replicate our work.
 ### 1. Data Pre-processing
@@ -58,7 +80,7 @@ Open ["HASHI_segmentation.py"](preprocessing/HASHI_segmentation.py) on your IDE,
 dir_slides = ''                 # path with all the slides, in this case, you should put here the path to HE images slides
 dir_thumbnails = ''             # path where segmentation masks will be stored (reduced size)
 ```
-This file is used to generate tumor segmentation masks. To run this script, type:
+This file is used to generate tumour segmentation masks. To run this script, type:
 ```bash
 $ python HASHI_segmentation.py
 ```
@@ -99,7 +121,7 @@ dir_thumbnails = ''     # path where thumbnails will be stored (img/otsu masks)
 dir_masks = ''          # annotation masks location (if there are annotation mask files)
 labels_file = ''        # .csv file with labels (structure: slide_name, IHC score (4 classes), IHC status (2 classes))
 ```
-Please note that you will have to run this twice: one run for the HE images and another for the HER2 images:
+Please note that you will have to run this twice: one execution for the HE images and another for the HER2 images:
 ```bash
 $ python wsi_main.py
 ```
@@ -153,7 +175,7 @@ And run the script:
 ```bash
 $ python cnn_ihc.py
 ```
-The end of the execution of this script will generate model file, similar to the ["IHC-HER2_model.tar"](authors_models/IHC-HER2_model.tar). So, if you want to skip this step, you can just use ours in the next step.
+The end of the execution of this script will generate a model file, similar to the ["IHC-HER2_model.tar"](authors_models/IHC-HER2_model.tar). So, if you want to skip this step, you can just use ours in the next step.
 
 After, open the ["model_train.py"](model_train.py) file on your IDE and edit the following variables:
 ```python

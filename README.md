@@ -34,4 +34,4 @@ Or you can create a virtual Python environment (Python 3.7) and run:
 $ pip install -r requirements.txt
 ```
 ## Data
-If you need help with access to the data used in this paper, please send an e-mail to: [sara.i.oliveira@inesctec.pt](mailto:sara.i.oliveira@inesctec.pt)
+If you need help with access to the data used in this paper, please send an e-mail to: [sara.i.oliveira@inesctec.pt](mailto:sara.i.oliveira@inesctec.pt).

@@ -193,8 +193,8 @@ cnn_file = './authors_models/IHC-HER2_model.tar'            # file with IHC-HER2
 If you use this repository in your research work, please cite this paper:
 ```bibtex
 @article{oliveira2020weakly,
-  title={Weakly-Supervised Classification of HER2 Expression in Breast Cancer Haematoxylin and Eosin Stained Slides},
-  author={Oliveira, Sara P and Ribeiro Pinto, Jo{\~a}o and Gon{\c{c}}alves, Tiago and Canas-Marques, Rita and Cardoso, Maria-Jo{\~a}o and Oliveira, H{\'e}lder P and Cardoso, Jaime S},
+  title={{Weakly-Supervised Classification of HER2 Expression in Breast Cancer Haematoxylin and Eosin Stained Slides}},
+  author={Oliveira, Sara P. and Ribeiro Pinto, Jo{\~a}o and Gon{\c{c}}alves, Tiago and Canas-Marques, Rita and Cardoso, Maria-Jo{\~a}o and Oliveira, H{\'e}lder P. and Cardoso, Jaime S.},
   journal={Applied Sciences},
   volume={10},
   number={14},

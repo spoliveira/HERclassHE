@@ -63,9 +63,9 @@ $ pip install ghalton
 ```
 
 
-
 ## Data
-If you need help with access to the data used in this paper, please send an e-mail to [sara.i.oliveira@inesctec.pt](mailto:sara.i.oliveira@inesctec.pt).
+The dataset is composed of subsets of WSI from two public datasets: the [HER2 Scoring Contest](https://warwick.ac.uk/fac/sci/dcs/research/tia/her2contest/) training set and the [TCGA-TCIA-BRCA collection](https://wiki.cancerimagingarchive.net/display/Public/TCGA-BRCA).
+
 ## Usage
 We advise you to read the [full paper](https://www.mdpi.com/2076-3417/10/14/4728) to understand which task may fit your purposes or if you want to replicate our work.
 ### 1. Data Pre-processing
@@ -135,19 +135,16 @@ classes = 2      # number of classes to combine (according IHC status, 2 classes
 If you want to perform inference-only on HE images, you have to open ["model_test_inference.py"](model_test_inference.py) on your IDE and edit the following variables:
 ```python
 # --- Data directories ---
-data_path = ''         # path with test/inference .pkl files (per slide) with HE tiles
+data_path = ''           # path with test/inference .pkl files (per slide) with HE tiles
 
-AGGREGATION = 'mean'                                       # aggregation method ('mlp', 'mean' or 'median')
-
-cnn_file = '' # correspondent model file
+# --- Hyperparameters ---
+AGGREGATION = 'mean'     # aggregation method ('mlp', 'mean' or 'median')
+cnn_file = ''            # correspondent model file
 
 # MORE INFORMATION BELOW 
 # "mean-median_pretrained_IHCweights.pth.tar" for mean or median with pretrained IHC weights
-
 # "mean-median_wOUT_pretrained_IHCweights.pth.tar" for mean or median without pretrained IHC weights
-
 # "proposed_model_wOUT_pretrained_IHCweights.pth.tar" for our proposed mlp without pretrained IHC weights
-
 # "proposed_model.pth.tar" for our proposed model
 ```
 Then, assuming that you are in the project root directory, run the script:
@@ -160,12 +157,11 @@ To perform the model training according to the paper, you need to open ["cnn_ihc
 # --- Data directories ---
 train_path = ''       # path with train HER2 .pkl files (per class) with IHC tiles
 val_path = ''         # path with validation .pkl files (per class) with IHC tiles
- 
 
 # --- Hyperparameters ---
 DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'  # gpu to use
 N_EPOCHS = 200                                             # number of training epochs (default: 200)
-BATCH_TILE = 128 # number of tiles per batch (default: 128)
+BATCH_TILE = 128                                           # number of tiles per batch (default: 128)
 ```
 Then, to run, you need to go the ["cnn_ihc"](cnn_ihc) directory first:
 ```bash
@@ -182,7 +178,6 @@ After, open the ["model_train.py"](model_train.py) file on your IDE and edit the
 # --- Data directories ---
 train_path = ''        # path with train HER2/HE .pkl files (per slide) with HE tiles
 val_path = ''          # path with HER2/HE validation .pkl files (per slide) with HE tiles
-
 
 # --- Hyperparameters ---
 DEVICE = 'cuda:0' if torch.cuda.is_available() else 'cpu'   # gpu to use

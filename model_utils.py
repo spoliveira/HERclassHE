@@ -276,7 +276,7 @@ def train_model(device, filename, model, aggregation, loss_fn, optimizer, n_epoc
         random.shuffle(train_files_)
 
         # Sort files as 010101...
-        train_gt = np.array([int(f.split('_')[-2]) for f in train_files_])
+        train_gt = np.array([int(f.split('_')[-1]) for f in train_files_])
         train_all = [np.argwhere(train_gt == 0), np.argwhere(train_gt == 1)]
         train_files = []
 
@@ -472,7 +472,7 @@ def train_model(device, filename, model, aggregation, loss_fn, optimizer, n_epoc
 #----------------------------------------------------- Test ------------------------------------------------------
 def test_model(device, model, aggregation, loss_fn, test_path, SHUFFLE=False, BATCH_TILE=300, NUM_WORK=8):
 
-    test_files = np.array([f.split('.')[0] for f in os.listdir(test_path) if f.endswith('') ])
+    test_files = np.array([f.split('.')[0] for f in os.listdir(test_path) if f.endswith('.pkl') ])
 
     with torch.no_grad():         
         model.eval()
@@ -550,7 +550,7 @@ def test_model(device, model, aggregation, loss_fn, test_path, SHUFFLE=False, BA
 #-------------------------------------------------- Inference ----------------------------------------------------
 def inference(device, model, aggregation, data_path, SHUFFLE=False, BATCH_TILE=300, NUM_WORK=8):
 
-    data_files = np.array([f.split('.')[0] for f in os.listdir(data_path) if f.endswith('') ])
+    data_files = np.array([f.split('.')[0] for f in os.listdir(data_path) if f.endswith('.pkl') ])
 
     with torch.no_grad():        
         model.eval()

@@ -65,7 +65,7 @@ $ pip install ghalton
 ### Data
 The dataset is composed of subsets of whole-slide images (WSI) from two public datasets: the [HER2 Scoring Contest](https://warwick.ac.uk/fac/sci/dcs/research/tia/her2contest/) training set and the [TCGA-TCIA-BRCA collection](https://wiki.cancerimagingarchive.net/display/Public/TCGA-BRCA).
 ### Models' Files
-The models' weights files are publicly available and can be downloaded [__here__](https://drive.google.com/drive/folders/1MXBW8onOz_Hi7f5JBdGFja8PzHx9gM30?usp=sharing). Download the Google Drive folder __"authors_models"__ and transfer all its contents to this repository's [__"authors_models"__](authors_models/) directory.
+The models' weights files are publicly available and can be downloaded [__here__](https://drive.google.com/file/d/10K_oj9aWYyqkwVTLl9by7QhQQerOCKES/view?usp=share_link). Download the Google Drive folder __"authors_models"__ and transfer all its contents to this repository's [__"authors_models"__](authors_models/) directory.
 
 ## Usage
 We advise you to read the [full paper](https://www.mdpi.com/2076-3417/10/14/4728) to understand which task may fit your purposes or if you want to replicate our work.
